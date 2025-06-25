@@ -1,0 +1,132 @@
+{
+    "annotations": { "list": [] },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "iteration": 1683400000000,
+    "links": [],
+    "panels": [
+      {
+        "type": "gauge",
+        "title": "CPU Usage (%)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100)",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "percent" } },
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 }
+      },
+      {
+        "type": "gauge",
+        "title": "Load Average (1m)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "node_load1",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "none" } },
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 }
+      },
+      {
+        "type": "gauge",
+        "title": "Memory Usage (%)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / node_memory_MemTotal_bytes * 100",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "percent" } },
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "Disk Read Ops/sec",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "rate(node_disk_reads_completed_total[1m])",
+            "legendFormat": "Reads",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "ops" } },
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 8 }
+      },
+      {
+        "type": "timeseries",
+        "title": "Disk Write Ops/sec",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "rate(node_disk_writes_completed_total[1m])",
+            "legendFormat": "Writes",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "ops" } },
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 16 }
+      },
+      {
+        "type": "gauge",
+        "title": "Disk Usage (%) on /",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "(node_filesystem_size_bytes{mountpoint=\"/\"} - node_filesystem_free_bytes{mountpoint=\"/\"}) / node_filesystem_size_bytes{mountpoint=\"/\"} * 100",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "percent" } },
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 16 }
+      },
+      {
+        "type": "timeseries",
+        "title": "Network Received (Bps)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(node_network_receive_bytes_total{device!~\"lo\"}[5m]))",
+            "legendFormat": "Receive",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "Bps", "decimals": 2 } },
+        "gridPos": { "h": 8, "w": 12, "x": 0, "y": 24 }
+      },
+      {
+        "type": "timeseries",
+        "title": "Network Transmitted (Bps)",
+        "datasource": "Prometheus",
+        "targets": [
+          {
+            "expr": "sum(rate(node_network_transmit_bytes_total{device!~\"lo\"}[5m]))",
+            "legendFormat": "Transmit",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": { "defaults": { "unit": "Bps", "decimals": 2 } },
+        "gridPos": { "h": 8, "w": 12, "x": 12, "y": 24 }
+      }
+    ],
+    "schemaVersion": 36,
+    "style": "dark",
+    "tags": ["custom", "monitoring"],
+    "templating": { "list": [] },
+    "time": { "from": "now-5m", "to": "now" },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Custom System Monitoring (imported)",
+    "version": 1
+  }

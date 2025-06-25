@@ -1,0 +1,191 @@
+{
+    "annotations": {
+      "list": []
+    },
+    "editable": true,
+    "gnetId": null,
+    "graphTooltip": 0,
+    "id": null,
+    "iteration": 1683400000000,
+    "links": [],
+    "panels": [
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+        "id": 1,
+        "title": "CPU Usage Total",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100)",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "percent"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+        "id": 2,
+        "title": "CPU Usage per Core",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "100 - (avg by (instance, cpu) (rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100)",
+            "interval": "",
+            "legendFormat": "CPU {{cpu}}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "gigabytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+        "id": 3,
+        "title": "Memory Available (GB)",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "node_memory_MemAvailable_bytes / 1024 / 1024 / 1024",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "gigabytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+        "id": 4,
+        "title": "Memory Used (GB)",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / 1024 / 1024 / 1024",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "gigabytes"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 16},
+        "id": 5,
+        "title": "Disk Free Space (GB) on /",
+        "type": "gauge",
+        "targets": [
+          {
+            "expr": "node_filesystem_avail_bytes{mountpoint=\"/\"} / 1024 / 1024 / 1024",
+            "interval": "",
+            "legendFormat": "{{instance}}",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ops"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 16},
+        "id": 6,
+        "title": "Disk Read Ops/sec",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(node_disk_reads_completed_total[1m])",
+            "interval": "",
+            "legendFormat": "Reads",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ops"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 24},
+        "id": 7,
+        "title": "Disk Write Ops/sec",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(node_disk_writes_completed_total[1m])",
+            "interval": "",
+            "legendFormat": "Writes",
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "datasource": "Prometheus",
+        "fieldConfig": {
+          "defaults": {
+            "unit": "ops"
+          },
+          "overrides": []
+        },
+        "gridPos": {"h": 8, "w": 24, "x": 12, "y": 24},
+        "id": 8,
+        "title": "Disk Total IOps",
+        "type": "timeseries",
+        "targets": [
+          {
+            "expr": "rate(node_disk_reads_completed_total[1m]) + rate(node_disk_writes_completed_total[1m])",
+            "interval": "",
+            "legendFormat": "Total IOps",
+            "refId": "A"
+          }
+        ]
+      }
+    ],
+    "schemaVersion": 36,
+    "style": "dark",
+    "tags": ["custom", "monitoring"],
+    "templating": { "list": [] },
+    "time": { "from": "now-5m", "to": "now" },
+    "timepicker": {},
+    "timezone": "",
+    "title": "Custom System Monitoring",
+    "version": 1
+  }
+  

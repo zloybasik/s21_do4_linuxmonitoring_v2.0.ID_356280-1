@@ -1,0 +1,20 @@
+
+# HELP my_cpu_usage_percent CPU usage in percent
+# TYPE my_cpu_usage_percent gauge
+my_cpu_usage_percent 1
+
+# HELP my_mem_total_bytes Total memory in bytes
+# TYPE my_mem_total_bytes gauge
+my_mem_total_bytes 2067345408
+
+# HELP my_mem_available_bytes Available memory in bytes
+# TYPE my_mem_available_bytes gauge
+my_mem_available_bytes 1618927616
+
+# HELP my_disk_total_bytes Total disk space on / in bytes
+# TYPE my_disk_total_bytes gauge
+my_disk_total_bytes 26238750720
+
+# HELP my_disk_free_bytes Free disk space on / in bytes
+# TYPE my_disk_free_bytes gauge
+my_disk_free_bytes 17751031808
